@@ -1,6 +1,6 @@
-from browserforge.fingerprints import Screen
-from playwright.async_api import async_playwright
+# from browserforge.fingerprints import Screen
 # from camoufox import AsyncCamoufox
+from playwright.async_api import async_playwright
 import asyncio
 import os
 
