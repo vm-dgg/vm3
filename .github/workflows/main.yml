@@ -10,6 +10,11 @@ on:
 jobs:
   run:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      # max-parallel: 3
+      matrix:
+        id: [1,2,3,4,5]
     permissions:
       contents: read
 
@@ -36,7 +41,7 @@ jobs:
           REF: ${{ secrets.REF }}
           MINUTOS: ${{ secrets.MINUTOS }}
           COMANDO: ${{ secrets.COMANDO }}
-        timeout-minutes: 55
+        timeout-minutes: 59
         continue-on-error: true
         run: python app.py
 
@@ -44,5 +49,6 @@ jobs:
         uses: actions/upload-artifact@v4
         if: success() || failure()
         with:
-          name: screenshot
+          name: screenshot-${{ matrix.id }}
           path: screen.png
+          if-no-files-found: ignore
